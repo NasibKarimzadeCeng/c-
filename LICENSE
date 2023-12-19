@@ -1,24 +1,194 @@
-This is free and unencumbered software released into the public domain.
+#include <iostream>
+using namespace std;
 
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
+class Isimler {
+private:
+    string gondericiIsmi;
+    string aliciIsmi;
 
-In jurisdictions that recognize copyright laws, the author or authors
-of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.
+public:
+    Isimler() {}
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+    void GetIsimler() {
+        cout << "Gonderici Ismi giriniz lutfen: ";
+        cin >> gondericiIsmi;
+        cout << "Alici ismi giriniz: ";
+        cin >> aliciIsmi;
+    }
+};
 
-For more information, please refer to <https://unlicense.org>
+class KargoTuru {
+private:
+    string tur;
+
+public:
+    KargoTuru() {}
+
+    void GetKargoTuru() {
+        int kargoturu;
+        cout << "Devam etmek istediginiz Kargo firmasini seciniz\n Kargo Firmalari kqye gore degisiklil gösterir.";
+
+        cout << "\n*****ARAS KARGO FIYATLARI ***** \n \n0 Ile 30 ARASI : 15.99 TL \n30 Ile  50 arası 29.99 TL \n50 Ile  100 arasi 49.99 TL\n";
+        cout << "\n*****PTT KARGO FIYATLARI ***** \n \n0 Ile 30 ARASI : 14.99 TL \n30 Ile  50 arası 24.99 TL \n50 Ile  100 arasi 44.99 TL\n";
+        cout << "\n*****YURTICI KARGO FIYATLARI ***** \n \n0 Ile 30 ARASI : 29.99 TL \n30 Ile 50 arası 39.99 TL \n50 Ile  100 arasi 59.99 TL\n";
+        cout << "\n*****MNG KARGO FIYATLARI ***** \n \n0 Ile 30 ARASI : 19.99 TL \n30 Ile  50 arası 29.99 TL \n50 Ile  100 arasi 49.99 TL\n\n";
+        cout << "1-Aras\n2-PTT\n3-YurtIci\n4-MNG\n\n";
+
+        while (true) {
+            cout << "Aras kargo daha hızlı gönderim saglar . \nYurtIcı kargo daha güvenli gonderim saglar . \nPTT kargo Belirlenen tarihde adresde olur . \nMNG kargo Kapida ödemelidir .\n ";
+            cout << "Seciminizi yapiniz (1-4 arasi): ";
+            cin >> kargoturu;
+
+            switch (kargoturu) {
+            case 1:
+                cout << "Aras kargo ile devam ediyorsunuz.\n";
+                return;
+            case 2:
+                cout << "PTT kargo ile devam ediyorsunuz.\n";
+                return;
+            case 3:
+                cout << "YurtIci kargo ile devam ediyorsunuz.\n";
+                return;
+            case 4:
+                cout << "MNG kargo ile devam ediyorsunuz.\n";
+                return;
+            default:
+                cout << "Girdiginiz deger 1 ile 4 arasinda olmalidir. Yeniden deneyin.\n";
+                break;
+            }
+        }
+    }
+};
+
+class KargoKq {
+public:
+    int kq;
+    KargoKq() {}
+
+    void GetKargoKg() {
+        int kargokq;
+        cout << "Kargo kq giriniz: ";
+        cin >> kargokq;
+        while (kargokq >= 100) {
+            cout << "Paketiniz 100 kqdan az olmalidir.\n";
+            cout << "Paket kqsi giriniz :";
+            cin >> kargokq;
+        }
+
+    }
+};
+class KargoNerede {
+protected:
+    string adres;
+public:
+    KargoNerede(){}
+
+    void SetKargoNerede() {
+
+        this->adres = adres;
+        
+        
+    }
+    void GetKargoNerede() {
+        cout << "Adresinizi giriniz : "; //Sadece harflarle Rakam Kullanılmaz
+          string  adres;
+        cin >> adres;
+        cout << adres << " Adresinde  saat 14:00 ile 18:00 Arasinda olucaz .";
+
+    }
+
+
+};
+class Şehir {
+private :
+    string şehir;
+public :
+    Şehir(){}
+    void SetŞehir() {
+        şehir;
+    }
+   virtual void GetŞehir() {
+        cout << "Kargo hangi sehire gidiyor : ";
+        string şehir;
+        cin >> şehir ;
+
+    }
+};
+class Kargoİdsi {
+private:
+    int KargoId;
+
+public:
+    Kargoİdsi() {}
+    ~Kargoİdsi(){}
+    friend void Kargoidsi(Kargoİdsi* ids);
+};
+
+void Kargoidsi(Kargoİdsi* ids) {
+    ids->KargoId = rand() % 9000000000000000 + 100000000000000;
+    cout << "\nKargo Idsi: " << ids->KargoId << endl;
+}
+class id : public Şehir {
+private:
+    int maik;
+public:
+    id(){}
+    ~id(){}
+    void GetŞehir() override {
+
+    }
+};
+class TahminiTeslim {
+
+public:
+    int* tahminiteslimsüresi;
+    TahminiTeslim() {
+        tahminiteslimsüresi = new int(0);
+    }
+
+    ~TahminiTeslim() {
+        delete tahminiteslimsüresi;
+    }
+
+    
+
+    void GetTahminiTeslimSüresi() {
+        srand(time(0));
+        *tahminiteslimsüresi = rand() % 4 + 1;
+        cout << "Tahmini teslim suresi :  " << *tahminiteslimsüresi << " Gun " << endl;
+    }
+};
+
+int main() {
+    Isimler isim;
+    isim.GetIsimler();
+
+    KargoKq kq;
+    kq.GetKargoKg();
+
+    KargoTuru tur;
+    tur.GetKargoTuru();
+
+    KargoNerede nerede;
+    nerede.GetKargoNerede();
+    nerede.SetKargoNerede();
+
+    
+    Kargoİdsi* kargoPtr = new Kargoİdsi(); 
+    Kargoidsi(kargoPtr); 
+
+    Şehir şehir;
+    şehir.GetŞehir();
+
+    
+
+
+    TahminiTeslim teslim;
+    teslim.GetTahminiTeslimSüresi();
+    
+
+    delete kargoPtr;
+
+        cout << "TESEKKURLER !";
+    return 0;
+}
